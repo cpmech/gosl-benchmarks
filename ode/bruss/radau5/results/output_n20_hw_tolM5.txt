@@ -1,0 +1,2 @@
+  ***** TOL=   1.0000000000000014E-005   ELAPSED TIME=   1.58699993E-02  ****
+ fcn=  367 jac=  45 step=  53 accpt=  52 rejct=  1 dec=  52 sol=  105

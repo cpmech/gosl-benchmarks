@@ -1,0 +1,11 @@
+tolerance                 = 1.0000000000000006e-05
+number of F evaluations   =   367
+number of J evaluations   =    45
+total number of steps     =    53
+number of accepted steps  =    52
+number of rejected steps  =     1
+number of decompositions  =    52
+number of lin solutions   =   105
+max number of iterations  =     3
+optimal step size Hopt    = 0.0662845600077322
+kind of linear solver     = "mumps"
