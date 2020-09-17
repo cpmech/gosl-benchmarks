@@ -52,7 +52,9 @@ func main() {
 	// output root
 	if mpi.WorldRank() == 0 {
 		fn := io.Sf("n%d_gosl_tolM%d.txt", N, tolExponent)
-		io.WriteTableVD("results", fn, []string{"y"}, y)
+		if N < 50 {
+			io.WriteTableVD("results", fn, []string{"yend"}, y)
+		}
 		io.Pf("tolerance                 = %v\n", tol)
 		sol.Stat.Print(true)
 	}
