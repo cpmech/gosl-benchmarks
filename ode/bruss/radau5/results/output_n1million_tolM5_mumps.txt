@@ -1,0 +1,17 @@
+vscode@c6e09610fcff:/workspaces/gosl-benchmarks/ode/bruss/radau5$ go build && time mpirun -np 1 ./radau5 
+N                         = 1000000
+tolerance                 = 1.0000000000000006e-05
+number of F evaluations   =   379
+number of J evaluations   =    46
+total number of steps     =    54
+number of accepted steps  =    52
+number of rejected steps  =     2
+number of decompositions  =    54
+number of lin solutions   =   109
+max number of iterations  =     3
+optimal step size Hopt    = 0.04150826832644228
+kind of linear solver     = "mumps"
+
+real    11m29.146s
+user    11m5.743s
+sys     0m23.307s
