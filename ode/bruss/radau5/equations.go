@@ -80,6 +80,7 @@ func equations(N int, comm *mpi.Communicator) (
 	}
 
 	// initial values
+	w.Fill(0)
 	for i := start; i < endp1; i++ {
 		m := 2 * i
 		n := m + 1
@@ -89,5 +90,17 @@ func equations(N int, comm *mpi.Communicator) (
 	}
 	yini = la.NewVector(ndim)
 	comm.AllReduceSum(yini, w)
+
+	// debug
+	/*
+		J := new(la.Triplet)
+		jac(J, 0, 0, yini)
+		mJ := J.ToDense()
+		if comm.Rank() == 0 {
+			io.Pfyel("%v\n", mJ.Print("%7.2f"))
+		} else {
+			io.Pfmag("%v\n", mJ.Print("%7.2f"))
+		}
+	*/
 	return
 }

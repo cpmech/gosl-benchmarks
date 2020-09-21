@@ -51,7 +51,7 @@ func main() {
 
 	// output root
 	if mpi.WorldRank() == 0 {
-		fn := io.Sf("n%d_gosl_tolM%d.txt", N, tolExponent)
+		fn := io.Sf("n%d_gosl_tolM%d_np%d_%s.txt", N, tolExponent, comm.Size(), sol.Stat.LsKind)
 		if N < 50 {
 			io.WriteTableVD("results", fn, []string{"yend"}, y)
 		}
