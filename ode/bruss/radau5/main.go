@@ -55,6 +55,7 @@ func main() {
 		if N < 50 {
 			io.WriteTableVD("results", fn, []string{"yend"}, y)
 		}
+		io.Pf("N                         = %v\n", N)
 		io.Pf("tolerance                 = %v\n", tol)
 		sol.Stat.Print(true)
 	}

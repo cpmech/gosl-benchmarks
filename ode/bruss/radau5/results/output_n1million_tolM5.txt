@@ -1,0 +1,17 @@
+vscode@9c3dac4c8e6f:/workspaces/gosl-benchmarks/ode/bruss/radau5$ time ./radau5 
+N                         = 1000000
+tolerance                 = 1.0000000000000006e-05
+number of F evaluations   =   379
+number of J evaluations   =    46
+total number of steps     =    54
+number of accepted steps  =    52
+number of rejected steps  =     2
+number of decompositions  =    54
+number of lin solutions   =   109
+max number of iterations  =     3
+optimal step size Hopt    = 0.04150824117702179
+kind of linear solver     = "umfpack"
+
+real    4m39.692s
+user    4m26.996s
+sys     0m36.653s
