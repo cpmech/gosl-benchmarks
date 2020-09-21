@@ -34,7 +34,7 @@ func main() {
 	comm := mpi.NewCommunicator(nil)
 
 	// problem
-	fcn, jac, y := problem(N, comm)
+	fcn, jac, y := equations(N, comm)
 
 	// configurations
 	conf := ode.NewConfig("radau5", "", comm)

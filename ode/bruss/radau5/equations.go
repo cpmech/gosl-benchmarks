@@ -10,7 +10,7 @@ import (
 	"math"
 )
 
-func problem(N int, comm *mpi.Communicator) (
+func equations(N int, comm *mpi.Communicator) (
 	fcn func(f la.Vector, dx, x float64, y la.Vector),
 	jac func(dfdy *la.Triplet, dx, x float64, y la.Vector),
 	yini la.Vector,

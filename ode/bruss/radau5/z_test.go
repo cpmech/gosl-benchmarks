@@ -40,7 +40,7 @@ func TestJacobian(tst *testing.T) {
 	comm := mpi.NewCommunicator(nil)
 
 	// problem
-	fcn, jac, y := problem(N, comm)
+	fcn, jac, y := equations(N, comm)
 
 	// test function
 	tstFcn := func(fy, y la.Vector) {
