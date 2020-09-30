@@ -14,8 +14,8 @@ import (
 func main() {
 
 	// constants
-	N := 20
-	tolExponent := 5
+	N := 100000
+	tolExponent := 2
 	tol := math.Pow(0.1, float64(tolExponent))
 
 	// start mpi
@@ -37,17 +37,18 @@ func main() {
 	fcn, jac, y := equations(N, comm)
 
 	// configurations
-	conf := ode.NewConfig("radau5", "", comm)
+	conf := ode.NewConfig("radau5", "mumps", comm)
 	conf.SetStepOut(true, nil)
 	conf.SetTol(tol)
-	conf.IniH = 1e-6
+	conf.IniH = 0.05
+	conf.GoChan = false
 
 	// solver
 	ndim := 2 * N
 	sol := ode.NewSolver(ndim, conf, fcn, jac, nil)
 
 	// solve
-	sol.Solve(y, 0.0, 10.0)
+	sol.Solve(y, 0.0, 0.1)
 
 	// output root
 	if mpi.WorldRank() == 0 {
