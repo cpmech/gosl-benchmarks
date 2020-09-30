@@ -7,8 +7,6 @@ import (
 
 func main() {
 	io.Pf("hello\n")
-	// bmark.StartNewStopwatch()
-	// bmark.StartNewStopwatch()
 	sw := bmark.StartNewStopwatch()
 	sw.Stop("")
 }
