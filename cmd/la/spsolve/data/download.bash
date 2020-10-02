@@ -6,8 +6,18 @@ get_matrix() {
   wget https://suitesparse-collection-website.herokuapp.com/MM/$GROUP/$NAME.tar.gz
   tar xzf $NAME.tar.gz
   mv $NAME/$NAME.mtx .
-  rmdir $NAME
+  rm -rf $NAME
   rm $NAME.tar.gz
 }
 
-get_matrix GHS_psdef inline_1
+# M1
+# get_matrix GHS_psdef inline_1
+
+# M3
+# get_matrix GHS_psdef audikw_1
+
+# M5
+# get_matrix Janna Flan_1565
+
+# M8
+# get_matrix Bourchtein atmosmodl 

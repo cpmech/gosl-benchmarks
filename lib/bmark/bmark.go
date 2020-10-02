@@ -22,8 +22,12 @@ func StartNewStopwatch() (o *Stopwatch) {
 }
 
 // Stop stops stopwatch and print the elapsed time
-func (o *Stopwatch) Stop(messagePrefix string) {
-	io.Pf("%selapsed time = %v\n", messagePrefix, time.Now().Sub(o.initialTime))
+func (o *Stopwatch) Stop(messagePrefix ...string) {
+	prefix := ""
+	if len(messagePrefix) > 0 {
+		prefix = messagePrefix[0]
+	}
+	io.Pf("%selapsed time = %v\n", prefix, time.Now().Sub(o.initialTime))
 }
 
 // Reset resets stopwatch
@@ -45,11 +49,15 @@ func (o *Stopwatch) Reset() {
 //   Gigabytes versus Gibibytes the difference becomes much more noticeable
 //   REFERENCE: https://blog.digilentinc.com/mib-vs-mb-whats-the-difference/
 //
-func MemoryUsage() {
+func MemoryUsage(messagePrefix ...string) {
+	prefix := ""
+	if len(messagePrefix) > 0 {
+		prefix = messagePrefix[0]
+	}
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
-	io.Pf("Current Alloc = %v MiB", getMiB(m.Alloc))
-	io.Pf("\tTotalAlloc = %v MiB\n", getMiB(m.TotalAlloc))
+	io.Pf("%smemory: current = %v MiB", prefix, getMiB(m.Alloc))
+	io.Pf(", total = %v MiB\n", getMiB(m.TotalAlloc))
 }
 
 func getMiB(b uint64) uint64 {
