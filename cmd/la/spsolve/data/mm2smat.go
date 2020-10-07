@@ -17,8 +17,8 @@ func main() {
 
 	io.Pf("reading matrix\n")
 	T := new(la.Triplet)
-	T.ReadSmat(io.Sf("%s.mtx", fnkey), true)
+	T.ReadSmat(io.Sf("%s.mtx", fnkey))
 
 	io.Pf("saving matrix\n")
-	T.WriteSmat("", fnkey, 1e-15)
+	T.WriteSmat("", fnkey, 1e-15, "", false, false)
 }
