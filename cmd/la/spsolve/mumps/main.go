@@ -50,6 +50,7 @@ func main() {
 	io.Pf("initializing\n")
 	args := la.NewSparseConfig(comm)
 	args.Symmetric = symmetric
+	args.MumpsMaxMemoryPerProcessor = 3000
 	solver.Init(T, args)
 	results()
 
