@@ -1,42 +1,59 @@
 package main
 
 import (
-	"fmt"
+	"_/lib/bmark"
 	"gosl/chk"
 	"gosl/io"
 	"gosl/la"
-	"runtime"
-	"time"
 )
 
-func main() {
-	// Print our starting memory usage (should be around 0mb)
-	// PrintMemUsage()
+var globalSW *bmark.Stopwatch
 
-	io.Pf("reading matrix\n")
-	startTime := time.Now()
+func init() {
+	globalSW = bmark.StartNewStopwatch()
+}
+
+func results() {
+	globalSW.Stop("... ")
+	bmark.MemoryUsage("... ")
+	globalSW.Reset()
+}
+
+func main() {
+	fnkey := "inline_1"
+
+	// allocate solver
+	solver := la.NewSparseSolver("umfpack")
+	defer func() {
+		solver.Free()
+	}()
+
+	io.Pf("reading matrix (%s)\n", fnkey)
 	T := new(la.Triplet)
-	T.ReadSmat("../data/inline_1.mtx", true)
-	io.Pf("elapsed time = %v\n", time.Now().Sub(startTime))
-	// PrintMemUsage()
+	symmetric := T.ReadSmat(io.Sf("../data/%s.mtx", fnkey))
+	if symmetric {
+		io.Pf("    is symmetric\n")
+	}
+	results()
 
 	m, n := T.Size()
 	if m != n {
 		chk.Panic("matrix must be square. m=%d, n=%d\n", m, n)
 	}
+	x := la.NewVector(m)
 	b := la.NewVector(m)
-	PrintMemUsage()
+
+	io.Pf("initializing\n")
+	args := la.NewSparseConfig(nil)
+	args.Symmetric = symmetric
+	solver.Init(T, args)
+	results()
+
+	io.Pf("factorizing\n")
+	solver.Fact()
+	results()
 
 	io.Pf("solving\n")
-	startTime = time.Now()
-	la.SpSolve(T, b)
-	io.Pf("elapsed time = %v\n", time.Now().Sub(startTime))
-
-	// Print our memory usage
-	// PrintMemUsage()
-
-	// Force GC to clear up, should see a memory drop
-	// runtime.GC()
-	// PrintMemUsage()
+	solver.Solve(x, b, false)
+	results()
 }
-
