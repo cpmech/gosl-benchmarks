@@ -1,0 +1,14 @@
+reading matrix (inline_1)
+... is symmetric
+... elapsed time = 5.485196943s
+... memory: current = 1257 MiB, total = 2323 MiB
+initializing (umfpack)
+... elapsed time = 4.974727ms
+... memory: current = 1831 MiB, total = 2896 MiB
+factorizing (umfpack)
+... elapsed time = 24.544648686s
+... memory: current = 1427 MiB, total = 2896 MiB
+solving (umfpack)
+... elapsed time = 469.155935ms
+... memory: current = 1427 MiB, total = 2896 MiB
+... total (without reading) elapsed time = 25.019063302s

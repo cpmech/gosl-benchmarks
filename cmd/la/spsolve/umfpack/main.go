@@ -23,7 +23,8 @@ func main() {
 	fnkey := "inline_1"
 
 	// allocate solver
-	solver := la.NewSparseSolver("umfpack")
+	kind := "umfpack"
+	solver := la.NewSparseSolver(kind)
 	defer func() {
 		solver.Free()
 	}()
@@ -32,7 +33,7 @@ func main() {
 	T := new(la.Triplet)
 	symmetric := T.ReadSmat(io.Sf("../data/%s.mtx", fnkey))
 	if symmetric {
-		io.Pf("    is symmetric\n")
+		io.Pf("... is symmetric\n")
 	}
 	results()
 
@@ -43,17 +44,19 @@ func main() {
 	x := la.NewVector(m)
 	b := la.NewVector(m)
 
-	io.Pf("initializing\n")
+	sw := bmark.StartNewStopwatch()
+	io.Pf("initializing (%s)\n", kind)
 	args := la.NewSparseConfig(nil)
 	args.Symmetric = symmetric
 	solver.Init(T, args)
 	results()
 
-	io.Pf("factorizing\n")
+	io.Pf("factorizing (%s)\n", kind)
 	solver.Fact()
 	results()
 
-	io.Pf("solving\n")
+	io.Pf("solving (%s)\n", kind)
 	solver.Solve(x, b, false)
 	results()
+	sw.Stop("... total (without reading) ")
 }
