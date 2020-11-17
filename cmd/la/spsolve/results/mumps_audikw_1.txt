@@ -1,0 +1,16 @@
+reading matrix (audikw_1)
+... symmetric = true
+... number of rows (equal to columns) = 943695
+... number of non-zeros (pattern entries) = 77651847
+... elapsed time = 10.721024074s
+... memory: current = 2284 MiB, total = 4797 MiB
+initializing (mumps)
+... elapsed time = 2.393477207s
+... memory: current = 2891 MiB, total = 5404 MiB
+factorizing (mumps)
+... elapsed time = 2m39.635951099s
+... memory: current = 2405 MiB, total = 5404 MiB
+solving (mumps)
+... elapsed time = 3.03805951s
+... memory: current = 2405 MiB, total = 5404 MiB
+... total (without reading) elapsed time = 2m45.066825365s
