@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	fnkey := "atmosmodl"
+	fnkey := "tmt_unsym"
 
 	sw := bmark.StartNewStopwatch()
 	defer func() {

@@ -1,0 +1,13 @@
+reading matrix (tmt_unsym)
+... elapsed time = 1.210193725s
+... memory: current = 124 MiB, total = 455 MiB
+initializing (umfpack)
+... elapsed time = 2.554983ms
+... memory: current = 215 MiB, total = 546 MiB
+factorizing (umfpack)
+... elapsed time = 6.653751081s
+... memory: current = 196 MiB, total = 546 MiB
+solving (umfpack)
+... elapsed time = 410.244352ms
+... memory: current = 196 MiB, total = 546 MiB
+... total (without reading) elapsed time = 7.065214442s

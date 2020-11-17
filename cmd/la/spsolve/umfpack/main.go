@@ -20,10 +20,11 @@ func results() {
 }
 
 func main() {
-	fnkey := "inline_1"
+	// fnkey := "inline_1"
 	// fnkey := "audikw_1"
 	// fnkey := "Flan_1565"
 	// fnkey := "atmosmodl"
+	fnkey := "tmt_unsym"
 
 	// allocate solver
 	kind := "umfpack"
