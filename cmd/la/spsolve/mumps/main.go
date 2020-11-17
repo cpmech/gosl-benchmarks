@@ -21,8 +21,10 @@ func results() {
 }
 
 func main() {
-	// fnkey := "inline_1"
-	fnkey := "Flan_1565"
+	fnkey := "inline_1"
+	// fnkey := "audikw_1"
+	// fnkey := "Flan_1565"
+	// fnkey := "atmosmodl"
 
 	// allocate communicator and solver
 	mpi.Start()
@@ -48,6 +50,7 @@ func main() {
 	}
 	x := la.NewVector(m)
 	b := la.NewVector(m)
+	b.Fill(1)
 
 	sw := bmark.StartNewStopwatch()
 	io.Pf("initializing (%s)\n", kind)
