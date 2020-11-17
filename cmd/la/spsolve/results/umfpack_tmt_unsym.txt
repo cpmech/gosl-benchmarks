@@ -1,13 +1,16 @@
 reading matrix (tmt_unsym)
-... elapsed time = 1.210193725s
+... symmetric = false
+... number of rows (equal to columns) = 917825
+... number of non-zeros (pattern entries) = 4584801
+... elapsed time = 1.235388459s
 ... memory: current = 124 MiB, total = 455 MiB
 initializing (umfpack)
-... elapsed time = 2.554983ms
+... elapsed time = 2.527123ms
 ... memory: current = 215 MiB, total = 546 MiB
 factorizing (umfpack)
-... elapsed time = 6.653751081s
+... elapsed time = 6.679260102s
 ... memory: current = 196 MiB, total = 546 MiB
 solving (umfpack)
-... elapsed time = 410.244352ms
+... elapsed time = 410.422263ms
 ... memory: current = 196 MiB, total = 546 MiB
-... total (without reading) elapsed time = 7.065214442s
+... total (without reading) elapsed time = 7.090889556s
