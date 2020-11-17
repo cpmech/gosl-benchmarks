@@ -1,1 +1,1 @@
-failed: initialization won't complete
+failed: not enough memory

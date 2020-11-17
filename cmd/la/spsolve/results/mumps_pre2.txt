@@ -1,13 +1,16 @@
 reading matrix (pre2)
-... elapsed time = 1.666717093s
+... symmetric = false
+... number of rows (equal to columns) = 659033
+... number of non-zeros (pattern entries) = 5959282
+... elapsed time = 1.562685903s
 ... memory: current = 265 MiB, total = 578 MiB
 initializing (mumps)
-... elapsed time = 1.791459396s
+... elapsed time = 1.703693523s
 ... memory: current = 192 MiB, total = 634 MiB
 factorizing (mumps)
-... elapsed time = 1m52.383585449s
+... elapsed time = 1m43.689687369s
 ... memory: current = 192 MiB, total = 634 MiB
 solving (mumps)
-... elapsed time = 1.062243241s
+... elapsed time = 1.042847132s
 ... memory: current = 192 MiB, total = 634 MiB
-... total (without reading) elapsed time = 1m55.236449859s
+... total (without reading) elapsed time = 1m46.435018451s

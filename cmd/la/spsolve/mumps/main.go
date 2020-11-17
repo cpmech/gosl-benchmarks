@@ -22,12 +22,12 @@ func results() {
 
 func main() {
 	// fnkey := "inline_1"
-	fnkey := "audikw_1"
+	// fnkey := "audikw_1"
 	// fnkey := "Flan_1565"
-	// fnkey := "atmosmodl"
+	// fnkey := "atmosmodl" // fail
 	// fnkey := "tmt_unsym"
-	// fnkey := "Hamrle3"
-	// fnkey := "pre2"
+	// fnkey := "Hamrle3" // fail
+	fnkey := "pre2"
 
 	// allocate communicator and solver
 	mpi.Start()
@@ -59,7 +59,7 @@ func main() {
 	io.Pf("initializing (%s)\n", kind)
 	args := la.NewSparseConfig(comm)
 	args.Symmetric = symmetric
-	args.MumpsMaxMemoryPerProcessor = 20000
+	args.MumpsMaxMemoryPerProcessor = 30000 // 30000 for Flan_1565
 	solver.Init(T, args)
 	results()
 
