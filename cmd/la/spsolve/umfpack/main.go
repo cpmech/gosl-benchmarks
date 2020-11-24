@@ -114,8 +114,6 @@ func main() {
 	io.Pf("... number of non-zeros (pattern entries) = %d\n", T.Len())
 	results()
 
-	// io.Pforan("%v\n", T.ToDense().Print("%10.2e"))
-
 	x := la.NewVector(m)
 	b := la.NewVector(m)
 	b.Fill(1)
