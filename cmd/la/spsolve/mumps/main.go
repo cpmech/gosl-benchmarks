@@ -134,7 +134,7 @@ func main() {
 	if symmetric {
 		args.SetMumpsSymmetry(true, false)
 	}
-	args.MumpsMaxMemoryPerProcessor = 10000
+	args.MumpsMaxMemoryPerProcessor = 30000
 	solver.Init(T, args)
 	results(comm)
 
@@ -156,7 +156,9 @@ func main() {
 		chk.Array(tst, "x", 1e-10, x, xCorrectBfwb62)
 		if comm.Size() == 1 {
 			xx := la.NewVector(m)
-			la.DenSolve(xx, T.ToDense(), b, false)
+			Td := new(la.Triplet)
+			Td.ReadSmat(io.Sf("../data/%s.mtx", fnkey), true, nil)
+			la.DenSolve(xx, Td.ToDense(), b, false)
 			chk.Array(tst, "xx", 1e-10, xx, xCorrectBfwb62)
 		}
 	}
