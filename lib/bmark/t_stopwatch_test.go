@@ -12,6 +12,10 @@ import (
 
 func TestStopwatch01(tst *testing.T) {
 
+	defer func() {
+		ResetGlobalStopwatch()
+	}()
+
 	// verbose()
 	chk.PrintTitle("Stopwatch01")
 

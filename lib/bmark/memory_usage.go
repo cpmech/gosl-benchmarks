@@ -2,37 +2,16 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Package bmark assists on benchmarks
 package bmark
 
 import (
 	"gosl/io"
 	"runtime"
-	"time"
 )
 
-// Stopwatch assists measuring computational time
-type Stopwatch struct {
-	initialTime time.Time
-}
-
-// StartNewStopwatch returns a new Stopwatch already started
-func StartNewStopwatch() (o *Stopwatch) {
-	return &Stopwatch{initialTime: time.Now()}
-}
-
-// Stop stops stopwatch and print the elapsed time
-func (o *Stopwatch) Stop(messagePrefix ...string) {
-	prefix := ""
-	if len(messagePrefix) > 0 {
-		prefix = messagePrefix[0]
-	}
-	io.Pf("%selapsed time = %v\n", prefix, time.Now().Sub(o.initialTime))
-}
-
-// Reset resets stopwatch
-func (o *Stopwatch) Reset() {
-	o.initialTime = time.Now()
+// Bytes2MiB converts bytes to MiB
+func Bytes2MiB(b uint64) uint64 {
+	return b / 1024 / 1024
 }
 
 // MemoryUsage prints the current memory usage
@@ -49,17 +28,17 @@ func (o *Stopwatch) Reset() {
 //   Gigabytes versus Gibibytes the difference becomes much more noticeable
 //   REFERENCE: https://blog.digilentinc.com/mib-vs-mb-whats-the-difference/
 //
-func MemoryUsage(messagePrefix ...string) {
-	prefix := ""
-	if len(messagePrefix) > 0 {
-		prefix = messagePrefix[0]
-	}
+// Input:
+//   messagePrefix -- if given, will print message, otherwise nothing is printed
+func MemoryUsage(messagePrefix ...string) (currentBytes, totalBytes uint64) {
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
-	io.Pf("%smemory: current = %v MiB", prefix, getMiB(m.Alloc))
-	io.Pf(", total = %v MiB\n", getMiB(m.TotalAlloc))
-}
-
-func getMiB(b uint64) uint64 {
-	return b / 1024 / 1024
+	currentBytes = m.Alloc
+	totalBytes = m.TotalAlloc
+	if len(messagePrefix) > 0 {
+		prefix := messagePrefix[0]
+		io.Pf("%smemory: current = %v Bytes = %v MiB", prefix, currentBytes, Bytes2MiB(currentBytes))
+		io.Pf(", total = %v Bytes = %v MiB\n", totalBytes, Bytes2MiB(totalBytes))
+	}
+	return
 }
