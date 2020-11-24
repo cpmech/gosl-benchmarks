@@ -1,16 +1,6 @@
 reading matrix (Flan_1565)
 ... symmetric = true
 ... number of rows (equal to columns) = 1564794
-... number of non-zeros (pattern entries) = 117406044
-... elapsed time = 14.069352734s
+... number of non-zeros (pattern entries) = 59485419
+... elapsed time = 14.562934091s
 ... memory: current = 3848 MiB, total = 7244 MiB
-initializing (mumps)
-... elapsed time = 3.073049869s
-... memory: current = 4767 MiB, total = 8164 MiB
-factorizing (mumps)
-... elapsed time = 3m54.0297464s
-... memory: current = 3642 MiB, total = 8164 MiB
-solving (mumps)
-... elapsed time = 5.084351914s
-... memory: current = 3642 MiB, total = 8164 MiB
-... total (without reading) elapsed time = 4m2.186130583s

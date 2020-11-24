@@ -1,0 +1,6 @@
+reading matrix (bfwb62)
+... symmetric = true
+... number of rows (equal to columns) = 62
+... number of non-zeros (pattern entries) = 202
+... elapsed time = 263.826361ms
+... memory: current = 0 MiB, total = 0 MiB

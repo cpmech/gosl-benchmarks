@@ -2,6 +2,7 @@ package main
 
 import (
 	"_/lib/bmark"
+	"flag"
 	"gosl/chk"
 	"gosl/io"
 	"gosl/la"
@@ -93,14 +94,10 @@ func pf(comm *mpi.Communicator, msg string, prm ...interface{}) {
 }
 
 func main() {
-	// fnkey := "inline_1"
-	// fnkey := "audikw_1"
-	// fnkey := "Flan_1565"
-	// fnkey := "atmosmodl" // fail
-	// fnkey := "tmt_unsym"
-	// fnkey := "Hamrle3" // fail
-	// fnkey := "pre2"
-	fnkey := "bfwb62"
+	// parse flags
+	var fnkey string
+	flag.StringVar(&fnkey, "fnkey", "inline_1", "fnkey = matrix name")
+	flag.Parse()
 
 	// allocate communicator and solver
 	mpi.Start()
@@ -112,6 +109,7 @@ func main() {
 		mpi.Stop()
 	}()
 
+	// read matrix
 	pf(comm, "reading matrix (%s)\n", fnkey)
 	T := new(la.Triplet)
 	symmetric := T.ReadSmat(io.Sf("../data/%s.mtx", fnkey), false, comm)
@@ -124,10 +122,12 @@ func main() {
 	pf(comm, "... number of non-zeros (pattern entries) = %d\n", T.Len())
 	results(comm)
 
+	// allocate vectors and set right-hand-side
 	x := la.NewVector(m)
 	b := la.NewVector(m)
 	b.Fill(1)
 
+	// initialize solver
 	sw := bmark.StartNewStopwatch()
 	pf(comm, "initializing (%s)\n", kind)
 	args := la.NewSparseConfig(comm)
@@ -138,15 +138,18 @@ func main() {
 	solver.Init(T, args)
 	results(comm)
 
+	// perform factorization
 	pf(comm, "factorizing (%s)\n", kind)
 	solver.Fact()
 	results(comm)
 
+	// solve system
 	pf(comm, "solving (%s)\n", kind)
 	solver.Solve(x, b, false)
 	results(comm)
 	sw.Stop("... total (without reading) ")
 
+	// check
 	if fnkey == "bfwb62" {
 		chk.Verbose = true
 		tst := new(testing.T)
