@@ -2,5 +2,15 @@ reading matrix (inline_1)
 ... symmetric = true
 ... number of rows (equal to columns) = 503712
 ... number of non-zeros (pattern entries) = 18660027
-... elapsed time = 5.653473992s
+... elapsed time = 5.805169965s
 ... memory: current = 1257 MiB, total = 2323 MiB
+initializing (mumps)
+... elapsed time = 762.536276ms
+... memory: current = 1407 MiB, total = 2473 MiB
+factorizing (mumps)
+... elapsed time = 13.893283551s
+... memory: current = 1407 MiB, total = 2473 MiB
+solving (mumps)
+... elapsed time = 643.966405ms
+... memory: current = 1407 MiB, total = 2473 MiB
+... total (without reading) elapsed time = 15.304568378s
