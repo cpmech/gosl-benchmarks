@@ -138,9 +138,6 @@ func main() {
 	results()
 	sw.Stop("... total (without reading) ")
 
-	// for i := 0; i < len(x); i++ {
-	// io.Pf("%+25.17e,\n", x[i])
-	// }
 	if fnkey == "bfwb62" {
 		chk.Verbose = true
 		tst := new(testing.T)
