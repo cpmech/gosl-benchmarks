@@ -35,4 +35,7 @@ get_matrix() {
 #get_matrix ATandT pre2
 
 # unsymmetric 4
-get_matrix Janna ML_Laplace
+#get_matrix Janna ML_Laplace
+
+# small 1
+get_matrix Bai bfwb62
