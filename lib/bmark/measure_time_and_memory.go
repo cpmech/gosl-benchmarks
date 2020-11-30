@@ -5,8 +5,9 @@
 package bmark
 
 import (
-	"gosl/mpi"
 	"time"
+
+	"github.com/cpmech/gosl/mpi"
 )
 
 var globalSW *Stopwatch

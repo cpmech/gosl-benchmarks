@@ -5,9 +5,10 @@
 package bmark
 
 import (
-	"gosl/chk"
 	"testing"
 	"time"
+
+	"github.com/cpmech/gosl/chk"
 )
 
 func TestTimeAndMemory01(tst *testing.T) {

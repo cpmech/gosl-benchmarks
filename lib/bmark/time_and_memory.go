@@ -6,8 +6,9 @@ package bmark
 
 import (
 	"encoding/json"
-	"gosl/chk"
-	"gosl/io"
+
+	"github.com/cpmech/gosl/chk"
+	"github.com/cpmech/gosl/io"
 )
 
 // TimeAndMemory holds time and memory results

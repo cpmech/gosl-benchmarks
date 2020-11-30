@@ -5,8 +5,9 @@
 package bmark
 
 import (
-	"gosl/io"
 	"runtime"
+
+	"github.com/cpmech/gosl/io"
 )
 
 // Bytes2MiB converts bytes to MiB

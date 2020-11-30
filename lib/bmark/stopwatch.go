@@ -5,8 +5,9 @@
 package bmark
 
 import (
-	"gosl/io"
 	"time"
+
+	"github.com/cpmech/gosl/io"
 )
 
 // Stopwatch assists measuring computational time
