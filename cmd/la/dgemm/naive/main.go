@@ -6,10 +6,11 @@ package main
 
 import (
 	"bytes"
-	"gosl/io"
-	"gosl/utl"
 	"math/rand"
 	"time"
+
+	"github.com/cpmech/gosl/io"
+	"github.com/cpmech/gosl/utl"
 )
 
 // NaiveMatMatMul is the naive version of la.MatMatMul

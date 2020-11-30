@@ -6,11 +6,12 @@ package main
 
 import (
 	"bytes"
-	"gosl/io"
-	"gosl/rnd"
-	"gosl/utl"
 	"sort"
 	"time"
+
+	"github.com/cpmech/gosl/io"
+	"github.com/cpmech/gosl/rnd"
+	"github.com/cpmech/gosl/utl"
 )
 
 func main() {

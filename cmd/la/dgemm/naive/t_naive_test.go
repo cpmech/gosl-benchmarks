@@ -5,10 +5,11 @@
 package main
 
 import (
-	"gosl/chk"
-	"gosl/io"
-	"gosl/utl"
 	"testing"
+
+	"github.com/cpmech/gosl/chk"
+	"github.com/cpmech/gosl/io"
+	"github.com/cpmech/gosl/utl"
 )
 
 func TestMatMatMul(tst *testing.T) {

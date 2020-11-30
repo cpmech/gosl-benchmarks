@@ -1,11 +1,17 @@
+// Copyright 2016 The Gosl Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 package main
 
 import (
-	"_/lib/bmark"
-	"gosl/chk"
-	"gosl/io"
-	"gosl/la"
 	"testing"
+
+	"_/lib/bmark"
+
+	"github.com/cpmech/gosl/chk"
+	"github.com/cpmech/gosl/io"
+	"github.com/cpmech/gosl/la"
 )
 
 var xCorrectBfwb62 = []float64{

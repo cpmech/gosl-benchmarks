@@ -5,9 +5,10 @@
 package main
 
 import (
-	"gosl/la"
-	"gosl/mpi"
 	"math"
+
+	"github.com/cpmech/gosl/la"
+	"github.com/cpmech/gosl/mpi"
 )
 
 func equations(N int, comm *mpi.Communicator) (

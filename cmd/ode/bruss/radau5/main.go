@@ -5,10 +5,11 @@
 package main
 
 import (
-	"gosl/io"
-	"gosl/mpi"
-	"gosl/ode"
 	"math"
+
+	"github.com/cpmech/gosl/io"
+	"github.com/cpmech/gosl/mpi"
+	"github.com/cpmech/gosl/ode"
 )
 
 func main() {

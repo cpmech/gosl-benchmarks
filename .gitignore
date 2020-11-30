@@ -2,7 +2,9 @@
 *.mtx
 *.smat
 
-la/dgemm/naive/naive
-la/dgemm/oblas/oblas
-ode/bruss/radau5/radau5
-utl/sort/sort
+go.sum
+
+cmd/la/dgemm/naive/naive
+cmd/la/dgemm/oblas/oblas
+cmd/ode/bruss/radau5/radau5
+cmd/utl/sort/sort
