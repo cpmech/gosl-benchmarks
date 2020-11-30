@@ -14,7 +14,7 @@ import (
 // SolverResults holds solver results
 type SolverResults struct {
 	Symmetric        bool
-	NumberOfRows     int // same as number of columns
+	NumberOfRows     int // equal to the number of columns
 	NumberOfNonZeros int // same as "pattern entries"
 	StepReadMatrix   *TimeAndMemory
 	StepInitialize   *TimeAndMemory
