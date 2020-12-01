@@ -23,7 +23,7 @@ type TimeAndMemory struct {
 
 // Save saves json file with results
 func (o TimeAndMemory) Save(dirout, fnkey string) {
-	b, err := json.Marshal(o)
+	b, err := json.MarshalIndent(o, "", "  ")
 	if err != nil {
 		chk.Panic("%v\n", err)
 	}

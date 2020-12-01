@@ -6,6 +6,7 @@ package bmark
 
 import (
 	"encoding/json"
+	"time"
 
 	"github.com/cpmech/gosl/chk"
 	"github.com/cpmech/gosl/io"
@@ -13,18 +14,21 @@ import (
 
 // SolverResults holds solver results
 type SolverResults struct {
-	Symmetric        bool
-	NumberOfRows     int // equal to the number of columns
-	NumberOfNonZeros int // same as "pattern entries"
-	StepReadMatrix   *TimeAndMemory
-	StepInitialize   *TimeAndMemory
-	StepFactorize    *TimeAndMemory
-	StepSolve        *TimeAndMemory
+	Symmetric             bool
+	NumberOfRows          int
+	NumberOfCols          int
+	NumberOfNonZeros      int // same as "pattern entries"
+	StepReadMatrix        *TimeAndMemory
+	StepInitialize        *TimeAndMemory
+	StepFactorize         *TimeAndMemory
+	StepSolve             *TimeAndMemory
+	TimeSolverNanoseconds int64  // total time Init+Fact+Solve (nanoseconds)
+	TimeSolverString      string // total time Init+Fact+Solve (string representation)
 }
 
 // Save saves json file with results
 func (o SolverResults) Save(dirout, fnkey string) {
-	b, err := json.Marshal(o)
+	b, err := json.MarshalIndent(o, "", "  ")
 	if err != nil {
 		chk.Panic("%v\n", err)
 	}
@@ -40,4 +44,13 @@ func ReadSolverResults(filename string) (o *SolverResults) {
 		chk.Panic("%v\n", err)
 	}
 	return
+}
+
+// CalcSolverTime sums init+fact+solve time
+func (o *SolverResults) CalcSolverTime() {
+	if o.StepInitialize == nil || o.StepFactorize == nil || o.StepSolve == nil {
+		chk.Panic("step time data must not be nil")
+	}
+	o.TimeSolverNanoseconds = o.StepInitialize.ElapsedTimeNanoseconds + o.StepFactorize.ElapsedTimeNanoseconds + o.StepSolve.ElapsedTimeNanoseconds
+	o.TimeSolverString = time.Duration(o.TimeSolverNanoseconds).String()
 }

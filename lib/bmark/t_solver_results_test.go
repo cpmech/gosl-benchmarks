@@ -57,3 +57,40 @@ func TestSolverResults01(tst *testing.T) {
 	etSolve, _ := time.ParseDuration(r1.StepSolve.ElapsedTimeString)
 	chk.Int64(tst, "etSolve", etSolve.Milliseconds(), 666)
 }
+
+func TestSolverResults02(tst *testing.T) {
+
+	defer func() {
+		ResetGlobalStopwatch()
+	}()
+
+	// verbose()
+	chk.PrintTitle("SolverResults02")
+
+	time.Sleep(333 * time.Millisecond)
+	stepReadMatrix := MeasureTimeAndMemory(false)
+
+	time.Sleep(400 * time.Millisecond)
+	stepInitialize := MeasureTimeAndMemory(false)
+
+	time.Sleep(400 * time.Millisecond)
+	stepFactorize := MeasureTimeAndMemory(false)
+
+	time.Sleep(200 * time.Millisecond)
+	stepSolve := MeasureTimeAndMemory(false)
+
+	r0 := &SolverResults{
+		Symmetric:        true,
+		NumberOfRows:     123,
+		NumberOfNonZeros: 456,
+		StepReadMatrix:   stepReadMatrix,
+		StepInitialize:   stepInitialize,
+		StepFactorize:    stepFactorize,
+		StepSolve:        stepSolve,
+	}
+
+	factor := int64(1e6) // nano to milli
+	r0.CalcSolverTime()
+	chk.Int64(tst, "TimeSolver [s]", r0.TimeSolverNanoseconds/factor, 1000)
+	chk.String(tst, r0.TimeSolverString[:3], "1.0")
+}
