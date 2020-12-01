@@ -26,8 +26,10 @@ func ResetGlobalStopwatch() {
 //   comm -- optional: communicator so only Rank#0 will print
 func MeasureTimeAndMemory(doPrint bool, comm ...*mpi.Communicator) (o *TimeAndMemory) {
 	if len(comm) > 0 {
-		if comm[0].Rank() != 0 {
-			doPrint = false
+		if comm[0] != nil {
+			if comm[0].Rank() != 0 {
+				doPrint = false
+			}
 		}
 	}
 	var elapsedTime time.Duration

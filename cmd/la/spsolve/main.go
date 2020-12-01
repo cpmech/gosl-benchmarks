@@ -18,34 +18,48 @@ import (
 )
 
 func pf(comm *mpi.Communicator, msg string, prm ...interface{}) {
-	if comm.Rank() == 0 {
+	if comm == nil {
+		io.Pf(msg, prm...)
+	} else if comm.Rank() == 0 {
 		io.Pf(msg, prm...)
 	}
 }
 
 func main() {
 	// parse flags
+	var kind string // "mumps" or "umfpack"
 	var fnkey string
+	flag.StringVar(&kind, "kind", "mumps", "\"mumps\" or \"umfpack\"")
 	flag.StringVar(&fnkey, "fnkey", "bfwb62", "fnkey = matrix name")
 	flag.Parse()
 
-	// allocate communicator and solver
-	mpi.Start()
-	comm := mpi.NewCommunicator(nil)
-	kind := "mumps"
-	solver := la.NewSparseSolver(kind)
-	defer func() {
-		solver.Free()
-		mpi.Stop()
-	}()
+	// check kind
+	if kind != "mumps" && kind != "umfpack" {
+		chk.Panic("kind must be \"mumps\" or \"umfpack\"")
+	}
+
+	// allocate communicator
+	var comm *mpi.Communicator
+	if kind == "mumps" {
+		mpi.Start()
+		comm = mpi.NewCommunicator(nil)
+		defer mpi.Stop()
+	}
 
 	// allocate SolverResults
 	res := new(bmark.SolverResults)
+	res.Kind = kind
+
+	// whether to load the full matrix or not, if symmetric
+	mirrorIfSym := false
+	if kind == "umfpack" {
+		mirrorIfSym = true
+	}
 
 	// read matrix
 	pf(comm, "reading matrix (%s)\n", fnkey)
 	T := new(la.Triplet)
-	res.Symmetric = T.ReadSmat(io.Sf("../data/%s.mtx", fnkey), false, comm)
+	res.Symmetric = T.ReadSmat(io.Sf("./data/%s.mtx", fnkey), mirrorIfSym, comm)
 	res.NumberOfRows, res.NumberOfCols = T.Size()
 	res.NumberOfNonZeros = T.Len()
 	if res.NumberOfRows != res.NumberOfCols {
@@ -60,6 +74,10 @@ func main() {
 	x := la.NewVector(res.NumberOfRows)
 	b := la.NewVector(res.NumberOfRows)
 	b.Fill(1)
+
+	// allocate solver
+	solver := la.NewSparseSolver(kind)
+	defer solver.Free()
 
 	// initialize solver
 	pf(comm, "initializing (%s)\n", kind)
@@ -81,21 +99,29 @@ func main() {
 	solver.Solve(x, b, false)
 	res.StepSolve = bmark.MeasureTimeAndMemory(true, comm)
 
-	// calc solver time and save results
+	// calc solver time
 	res.CalcSolverTime()
-	res.Save("../results", io.Sf("%s_%s", kind, fnkey))
+
+	// save results
+	if comm == nil {
+		res.Save("./results", io.Sf("%s_%s", kind, fnkey))
+	} else if comm.Rank() == 0 {
+		res.Save("./results", io.Sf("%s_%s_np%d", kind, fnkey, comm.Size()))
+	}
 
 	// check
 	if fnkey == "bfwb62" {
 		chk.Verbose = true
 		tst := new(testing.T)
 		chk.Array(tst, "x", 1e-10, x, reference.XCorrectBfwb62)
-		if comm.Size() == 1 {
-			xx := la.NewVector(res.NumberOfRows)
-			Td := new(la.Triplet)
-			Td.ReadSmat(io.Sf("../data/%s.mtx", fnkey), true, nil)
-			la.DenSolve(xx, Td.ToDense(), b, false)
-			chk.Array(tst, "xx", 1e-10, xx, reference.XCorrectBfwb62)
+		if comm != nil {
+			if comm.Size() == 1 {
+				xx := la.NewVector(res.NumberOfRows)
+				Td := new(la.Triplet)
+				Td.ReadSmat(io.Sf("./data/%s.mtx", fnkey), true, nil)
+				la.DenSolve(xx, Td.ToDense(), b, false)
+				chk.Array(tst, "xx", 1e-10, xx, reference.XCorrectBfwb62)
+			}
 		}
 	}
 }

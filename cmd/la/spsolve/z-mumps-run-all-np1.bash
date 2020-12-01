@@ -16,6 +16,5 @@ BIN="/tmp/spsolve-mumps"
 
 for fnkey in $FNKEYS; do
   echo "... running $fnkey"
-  go build -o $BIN
-  $BIN -fnkey=$fnkey > ../results/"mumps_$fnkey.txt"
+  go build -o $BIN && $BIN -kind="mumps" -fnkey=$fnkey
 done

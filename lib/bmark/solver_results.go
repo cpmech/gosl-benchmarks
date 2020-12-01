@@ -14,6 +14,7 @@ import (
 
 // SolverResults holds solver results
 type SolverResults struct {
+	Kind                  string
 	Symmetric             bool
 	NumberOfRows          int
 	NumberOfCols          int
