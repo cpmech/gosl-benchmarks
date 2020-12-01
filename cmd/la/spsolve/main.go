@@ -29,8 +29,10 @@ func main() {
 	// parse flags
 	var kind string // "mumps" or "umfpack"
 	var fnkey string
+	var ordering string // mumps' ordering
 	flag.StringVar(&kind, "kind", "mumps", "\"mumps\" or \"umfpack\"")
 	flag.StringVar(&fnkey, "fnkey", "bfwb62", "fnkey = matrix name")
+	flag.StringVar(&ordering, "ordering", "", "ordering for MUMPS")
 	flag.Parse()
 
 	// check kind
@@ -85,7 +87,10 @@ func main() {
 	if res.Symmetric {
 		args.SetMumpsSymmetry(true, false)
 	}
-	args.MumpsMaxMemoryPerProcessor = 30000
+	if kind == "mumps" {
+		args.SetMumpsOrdering(ordering)
+		args.MumpsMaxMemoryPerProcessor = 30000
+	}
 	solver.Init(T, args)
 	res.StepInitialize = bmark.MeasureTimeAndMemory(true, comm)
 
@@ -103,10 +108,14 @@ func main() {
 	res.CalcSolverTime()
 
 	// save results
+	outFnkey := io.Sf("%s_%s", kind, fnkey)
+	if ordering != "" {
+		outFnkey += "_" + ordering
+	}
 	if comm == nil {
-		res.Save("./results", io.Sf("%s_%s", kind, fnkey))
+		res.Save("./results", outFnkey)
 	} else if comm.Rank() == 0 {
-		res.Save("./results", io.Sf("%s_%s_np%d", kind, fnkey, comm.Size()))
+		res.Save("./results", io.Sf("%s_np%d", outFnkey, comm.Size()))
 	}
 
 	// check

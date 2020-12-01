@@ -15,6 +15,9 @@ FNKEYS="\
 BIN="/tmp/spsolve-umfpack"
 
 for fnkey in $FNKEYS; do
-  echo "... running $fnkey"
+  echo
+  echo "============================================================================"
+  echo "running with fnkey = $fnkey"
+  echo "============================================================================"
   go build -o $BIN && $BIN -kind="umfpack" -fnkey=$fnkey
 done
