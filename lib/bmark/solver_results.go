@@ -15,6 +15,8 @@ import (
 // SolverResults holds solver results
 type SolverResults struct {
 	Kind                  string
+	Ordering              string
+	MpiSize               int
 	Symmetric             bool
 	NumberOfRows          int
 	NumberOfCols          int

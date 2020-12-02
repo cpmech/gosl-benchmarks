@@ -51,6 +51,7 @@ func main() {
 	// allocate SolverResults
 	res := new(bmark.SolverResults)
 	res.Kind = kind
+	res.Ordering = ordering
 
 	// whether to load the full matrix or not, if symmetric
 	mirrorIfSym := false
@@ -91,6 +92,7 @@ func main() {
 		args.SetMumpsOrdering(ordering)
 		args.MumpsMaxMemoryPerProcessor = 30000
 	}
+	args.Verbose = true
 	solver.Init(T, args)
 	res.StepInitialize = bmark.MeasureTimeAndMemory(true, comm)
 
@@ -115,6 +117,7 @@ func main() {
 	if comm == nil {
 		res.Save("./results", outFnkey)
 	} else if comm.Rank() == 0 {
+		res.MpiSize = comm.Size()
 		res.Save("./results", io.Sf("%s_np%d", outFnkey, comm.Size()))
 	}
 

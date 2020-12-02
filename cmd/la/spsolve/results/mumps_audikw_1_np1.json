@@ -1,41 +1,43 @@
 {
   "Kind": "mumps",
+  "Ordering": "",
+  "MpiSize": 1,
   "Symmetric": true,
   "NumberOfRows": 943695,
   "NumberOfCols": 943695,
   "NumberOfNonZeros": 39297771,
   "StepReadMatrix": {
-    "ElapsedTimeNanoseconds": 10937051475,
-    "ElapsedTimeString": "10.937051475s",
-    "MemoryCurrentBytes": 2395497696,
-    "MemoryTotalBytes": 5030443968,
-    "MemoryCurrentMiB": 2284,
+    "ElapsedTimeNanoseconds": 10930941668,
+    "ElapsedTimeString": "10.930941668s",
+    "MemoryCurrentBytes": 2677671008,
+    "MemoryTotalBytes": 5030445712,
+    "MemoryCurrentMiB": 2553,
     "MemoryTotalMiB": 4797
   },
   "StepInitialize": {
-    "ElapsedTimeNanoseconds": 1799932178,
-    "ElapsedTimeString": "1.799932178s",
-    "MemoryCurrentBytes": 2724996688,
-    "MemoryTotalBytes": 5359942960,
-    "MemoryCurrentMiB": 2598,
+    "ElapsedTimeNanoseconds": 1705549301,
+    "ElapsedTimeString": "1.705549301s",
+    "MemoryCurrentBytes": 3007170000,
+    "MemoryTotalBytes": 5359944704,
+    "MemoryCurrentMiB": 2867,
     "MemoryTotalMiB": 5111
   },
   "StepFactorize": {
-    "ElapsedTimeNanoseconds": 152434961175,
-    "ElapsedTimeString": "2m32.434961175s",
-    "MemoryCurrentBytes": 2216026632,
-    "MemoryTotalBytes": 5359946880,
+    "ElapsedTimeNanoseconds": 170196176651,
+    "ElapsedTimeString": "2m50.196176651s",
+    "MemoryCurrentBytes": 2216026744,
+    "MemoryTotalBytes": 5359948832,
     "MemoryCurrentMiB": 2113,
     "MemoryTotalMiB": 5111
   },
   "StepSolve": {
-    "ElapsedTimeNanoseconds": 2957782785,
-    "ElapsedTimeString": "2.957782785s",
-    "MemoryCurrentBytes": 2216027168,
-    "MemoryTotalBytes": 5359947416,
+    "ElapsedTimeNanoseconds": 2979629988,
+    "ElapsedTimeString": "2.979629988s",
+    "MemoryCurrentBytes": 2216027272,
+    "MemoryTotalBytes": 5359949360,
     "MemoryCurrentMiB": 2113,
     "MemoryTotalMiB": 5111
   },
-  "TimeSolverNanoseconds": 157192676138,
-  "TimeSolverString": "2m37.192676138s"
+  "TimeSolverNanoseconds": 174881355940,
+  "TimeSolverString": "2m54.88135594s"
 }
