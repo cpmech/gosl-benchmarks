@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	_/lib v0.0.0
-	github.com/cpmech/gosl v1.2.5
+	github.com/cpmech/gosl v1.2.6
 )
 
 replace _/lib => ../lib
